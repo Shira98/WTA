@@ -49,7 +49,7 @@ class Di_Graph:
         #self.docs_root=(Q,self.doc_list,self.docs_root)
         
         #Add edges b/w navigational links. Combining trees.
-        for root in self.original_docs_root:
+        for root in self.docs_root:
             x=root.findall(".//")
             self.nav_elements=[]
 
@@ -61,8 +61,12 @@ class Di_Graph:
                         print(i.tag)
                         file_name=i.get('nav')
                         print(file_name)
+                        i.append(self.docs_root[self.doc_list.index(file_name)])
+
                 except:
                     pass
+
+            self.docs_root[self.doc_list.index(root)]=root
 
 
     def Distance(self):
@@ -89,6 +93,7 @@ New.Add_Edge(Query)
 
 #Fuzzification(Link_Score, Content_Score->initial_weights)	
 	#WTF do we do now
+
 
 
 
