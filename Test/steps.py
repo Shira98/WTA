@@ -60,9 +60,14 @@ class Di_Graph:
                         self.nav_elements.append(i) 
                         print(i.tag)
                         file_name=i.get('nav')
+                        print(file_name)
                 except:
                     pass
 
+
+    def Distance(self):
+        #2-D matrix for all the nodes. Distance b/w each element in it. 
+        pass                
 
 class Node:
     def __init__(self):
