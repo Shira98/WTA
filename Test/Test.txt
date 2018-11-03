@@ -1,0 +1,2 @@
+Contains 2 test .xml files present in temporary database - 'list.txt' handled by 'steps.py'
+
