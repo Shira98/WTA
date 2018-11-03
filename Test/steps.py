@@ -12,19 +12,19 @@ def Parse_Docs():
         content=f.readlines()
     Docs=[x.strip() for x in content]
 
-    print(Docs[1])    
+    #print(Docs[1])    
     return Docs   
 
 
 def Root(document_name):
-    document_name='draft.xml'
     tree = ET.parse(document_name)
     root = tree.getroot()
 
-    print(root.tag)
+    #print(root.tag)
 
     for child in root:
-        print(child.tag, child.attrib)
+        #print(child.tag, child.attrib)
+        pass
 
     return root
 
@@ -42,9 +42,26 @@ class Di_Graph:
             self.docs_root.append(Root(self.doc_list[i]))
             
         
-    #def Query_result():
+    def Add_Edge(self,Q):
     
-        #Mark nodes that have been returned by the query Q.        
+        #Pass Q, self.docs_root & self.doc_list onto a function which returns relevant nodes (Marked attributes for retrieved and navigational links).  
+        self.original_docs_root=self.docs_root
+        #self.docs_root=(Q,self.doc_list,self.docs_root)
+        
+        #Add edges b/w navigational links. Combining trees.
+        for root in self.original_docs_root:
+            x=root.findall(".//")
+            self.nav_elements=[]
+
+            for i in x:
+                #print(i.tag)
+                try:
+                    if i.attrib['nav']:
+                        self.nav_elements.append(i) 
+                        print(i.tag)
+                        file_name=i.get('nav')
+                except:
+                    pass
 
 
 class Node:
@@ -54,9 +71,11 @@ class Node:
 #MAIN
 Docs_List=Parse_Docs()
 New=Di_Graph(Docs_List)	
+Query='2008'
+New.Add_Edge(Query)
 
 #Link score computation with IP as the D-graph(Internal links as IP). 
-	#Relevant score = intital_weights(Link_i) [Assume till implementation is finished]
+	#Relevant score = intital_weights(Link_i) [Assume till implementation is finished->Vector Based]
 	#Path weight = Distance b/w nodes
 
 	#PATH_WEIGHT(Nodei,Nodej):
