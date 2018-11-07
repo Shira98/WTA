@@ -6,7 +6,7 @@ import xml.etree.ElementTree as ET
 import networkx as nx
 import math
 
-def Parse_Docs():
+def Docs_names():
 	Docs=list()
 	file='list.txt'
 	#for docs in file:
@@ -127,6 +127,32 @@ class Di_Graph:
 
 		#return list(set(ancestors_Ni).intersection(ancestors_Nj))[0]
 
+	def find_common_ancestor(self,Ni,Nj):
+
+		#finding ancestors for Ni,Nj
+		ancestors_Ni=self.Get_ancestors(Ni.getroot(),Ni)
+		ancestors_Nj=self.Get_ancestors(Nj.getroot(),Nj)
+
+		#finding fist matching ancestor to find distance
+		#distance is the sum of heights of elements from matching ancestor
+		for i in range(len(ancestors_Ni)):
+			for j in range(len(ancestors_Nj)):
+				if ancestors_Ni[i]==ancestors_Nj[j]:
+					return ancestors_Ni[i] 
+
+	def find_root_from_ancestors(Self,ancestors,node):
+
+		temp=None
+		for  element in ancestors:
+			try:
+				if element.attrib['root']:
+					temp=ancestors.index(element)
+					break
+			except:
+				pass 
+
+		return ancestors[temp],ancestors[temp+1]
+
 	def Nodes_in_same_file(self,Ni,Nj):
 
 		if Ni.doc==Nj.doc:
@@ -193,10 +219,8 @@ class Retrieved:
 		self.link_score=None
 		self.relevance_score=None
 		self.doc=doc
-		self.inlinks_list=[]
-		self.outlink_list=[]
-		self.inlinks=0
-		self.outlinks=0
+		self.inlinks=[]
+		self.outlinks=[]
 
 class Navigational:
 	def __init__(self,e,fdoc,tdoc):
@@ -209,7 +233,7 @@ class Node:
 		self.retrieved=False
 
 #MAIN
-Docs_List=Parse_Docs()
+Docs_List=Docs_names()
 New=Di_Graph(Docs_List)	
 Query='2008'
 #New.Add_Edge(Query)
