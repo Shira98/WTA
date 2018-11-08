@@ -1,0 +1,51 @@
+collection{
+	color: blue;
+}
+hypr{
+	color: blue;
+}
+
+band,place,schedules
+{
+	color: blue;
+	display: block;
+	font-weight: bold;
+	padding: 15px;
+	padding-left: 55px;
+	font-size: 20px;
+}
+
+titles{
+	font-weight: bold;
+	font-size: 25px;
+	padding-top: 70px;
+	padding-bottom: 70px;
+	padding-left: 40px;
+	color: #B53471;
+	text-decoration: underline;}
+genre{
+	font-style: italic;
+	color: #EA2027;
+	font-size: 18px;
+	padding-top: 12px;
+	padding-left: 80px;
+	font-weight: bold;}
+performers,tickets{
+	padding: 9px;
+	padding-left: 90px;
+	color: #EE5A24;
+	display: block;}
+seller_info{
+	color: #2f3640;
+	padding: 12px;
+	padding-left: 80px;
+	font-weight: bold;
+	font-size:16px;
+	display: block;}
+discount
+{
+	padding: 9px;
+	padding-left: 90px;
+	color: #EE5A84;
+	display: block;
+}
