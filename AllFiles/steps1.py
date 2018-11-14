@@ -87,17 +87,15 @@ class Di_Graph:
 						#print(self.doc_list.index(to_file))
 						i.append(self.docs_root[to_file])
 						self.docs_root[to_file].set('global_root',self.doc_list[from_file])
-						#print("hi#")
 
 				except:
 					#print("escaped")
 					pass
 
 			x=root.findall(".//")
-			for i in x:
-				print(i.tag)
 
 			self.docs_root[self.docs_root.index(root)]=root
+			
 		self.count_of_retrieved=len(list(set(temp_list)))
 		#print(len(self.retrieved))
 		for node in self.retrieved:
@@ -209,7 +207,7 @@ class Di_Graph:
 		stack = []
 		stack.append(iter([element]))
 		while stack:
-			print("hi")
+			#print("hi")
 			e = next(stack[-1], None)
 			if e == None:
 				stack.pop()
@@ -269,8 +267,8 @@ class Di_Graph:
 			node.outlinks_nodes+=self.docs_objects[node.doc].nodes_list
 			node.outlinks_nodes.remove(self.retrieved.index(node))
 
-			print(node.inlinks_nodes,node.outlinks_nodes)
-			print(node.element)
+			#print(node.inlinks_nodes,node.outlinks_nodes)
+			#print(node.element)
 
 	def Genrerate_nodes_list(self):
 		#Sets the nodes retrieved in a given document in a list
@@ -278,119 +276,13 @@ class Di_Graph:
 		for node in self.retrieved:
 			self.docs_objects[node.doc].nodes_list.append(self.retrieved.index(node))
 
-	def link_score_computation(self): #graph is path weight graph
-		# n,n graph where n is no of nodes
-		N=len(self.retrieved)
-		damp_factor=0.000001
-		#inlinks=[]
-		#outlinks=[]
-		self.link_score=[0 for i in range(N)]
-		#calculate inlinkrs and outlinks
-		#for vertex in range(N):
-		#	inlinks.append(get_inlinks(path_weight,vertex))
-		#	outlinks.append(get_outlinks(path_weight,vertex))
-
-		for no in range(N): #cal link score for each node
-			a=[]
-			node=self.retrieved[no]
-			a=node.inlinks_nodes #a conatins list of documents from which node has inlink
-			link_sum=0
-			for i in a: #for each node in inlinks
-				i_node=self.retrieved[i]
-				out=[]
-				sum_outL=0
-				out=i_node.outlinks_nodes
-				for i_o in out: #for each node in outlinks of i_node in a
-					i_onode=self.retrieved[i_o]
-					sum_outL=sum_outL+(1/1+self.path_weight_nodes(i_node,i_onode))
-				#print(node.content_score)
-				link_sum=link_sum+(node.content_score/1+(sum_outL*self.path_weight_nodes(i_node,node)))
-			link_sum=link_sum*(damp_factor) +((1-damp_factor)/N)
-			self.link_score[no]=link_sum
-
-
-	def link_weight_H(self,nodei,nodef):
-
-		doci=nodei.doc
-		docf=nodef.doc
-		indexi=self.retrieved.index(nodei)
-		indexf=self.retrieved.index(nodef)
-		sum_x=0.01
-
-		if(doci==docf): #they are in same doc
-			#link weight is hierarchial link weight
-			In=len(nodef.inlinks)
-			for Ip in nodei.outlinks: #Ip is each document index
-				sum_x=sum_x+len(self.docs_objects[Ip].inlinks)
-			link_weight=In/sum_x
-		return link_weight
 
 	def get_node(self,element):
 		for node in self.retrieved:
 			if node.element==element:
 				return node
 
-	def link_weight_N(self,nodei,docf): #docf is doc object
-		doci=nodei.doc
-		indexi=self.retrieved.index(nodei)
-		sum_x=0.01
-		In=len(docf.inlinks_nodes)#no of inlinks to docf
-		for Ip in nodei.outlinks: #Ip is doc index
-			sum_x=sum_x+len(self.docs_objects[Ip].inlinks)
-		link_weight=In/sum_x
-		return link_weight
 
-	def path_weight_nvgn(self,nodei,nodef,path_weight):
-		#find common ancestor of nodei and nodef
-		indexi=self.retrieved.index(nodei)
-		ancestor_element=self.find_common_ancestor(nodei,nodef)
-		ancestor=self.get_node(ancestor_element)
-		print(ancestor.element)
-		#if(ancestor==nodei and ancestor==nodef):
-			#return 0
-		if(ancestor==nodei): 
-			#ancestors of nodef
-			rootj=self.docs_root[nodef.doc]
-			global_rootj=self.docs_root[self.doc_list.index(rootj.get('global_root'))]
-			ancestors_Nj=self.Get_ancestors(global_rootj,nodef.element)
-			print(nodei.element,nodef.element)
-			#find first ancestor which is in nodei's doc
-			root_nodef_element,B_root_nodef_element=self.find_root_from_ancestors(ancestors_Nj,nodef)
-			root_nodef=self.get_node(root_nodef_element)
-			B_root_nodef=self.get_node(B_root_nodef_element)
-			if(B_root_nodef.doc==nodei.doc):
-				index_BRN=self.retrieved.index(B_root_nodef)
-				path_weight=path_weight+self.link_weight_N(B_root_nodef,nodef)+self.link_weight_H(nodei,B_root_nodef)*self.Distance_matrix[indexi][index_BRN]
-			else:
-				index_BRN=self.retrieved.index(B_root_nodef)
-				path_weight=path_weight+self.link_weight_N(B_root_nodef,root_nodef)+self.path_weight_nvgn(nodei,B_root_nodef,path_weight)
-			print(path_weight,'rec')
-			return path_weight
-
-		if(ancestor.doc==nodei.doc): #anc in nodei's doc
-			path_weight=path_weight+self.link_weight_H(nodei,ancestor)+self.path_weight_nvgn(ancestor,nodef,path_weight)
-		elif ancestor.doc==nodef.doc:
-			path_weight=path_weight+self.link_weight_H(ancestor,nodef)+self.path_weight_nvgn(nodei,ancestor,path_weight)
-		else:
-			path_weight=path_weight+self.path_weight_nvgn(ancestor,nodef,path_weight)+self.path_weight_nvgn(nodei,ancestor,path_weight)
-		print(path_weight,'seq')
-		return path_weight
-
-	def path_weight_nodes(self,i,f):
-
-		nodei=i.element
-		nodef=f.element
-		doci=i.doc
-		docf=f.doc
-		indexi=self.retrieved.index(i)
-		indexf=self.retrieved.index(f)
-		#print(indexi,indexf)
-		#print(self.Distance_matrix)
-		if(doci==docf): #they are in same doc
-			path_weight=self.Distance_matrix[indexi][indexf] * self.link_weight_H(i,f) 
-		else:	#diff doc nodei->EP->nodef #there exists a navigational link
-			path_weight=self.path_weight_nvgn(i,f,path_weight=0)
-		return path_weight 
 
 	def add_attrib_files(self,Query):
 
@@ -399,9 +291,143 @@ class Di_Graph:
 		for root in self.docs_root:
 
 			index=self.docs_root.index(root)
+			self.docs_root[index]=add_filename_attribute(self.doc_list[index],self.docs_root[index])
 			self.docs_root[index]=add_root_attribute(root,self.doc_list[index])
 			self.docs_root[index]=string_match(splitted_Query,self.doc_list[index],root)
-			self.docs_root[index]=nav_links(root,self.doc_list[index],self.doc_list) 
+			self.docs_root[index]=nav_links(root,self.doc_list[index],self.doc_list)
+
+
+	def printAllPathsUtil(self, u, d, visited, path,vertices):  
+
+		visited[vertices.index(u)]= True
+		path.append(u)
+		if u==d: 
+			return path
+		else:
+			for i in u.findall(".//"): 
+				if visited[vertices.index(i)]==False: 
+					path=self.printAllPathsUtil(i, d, visited, path,vertices)
+					if(len(path)!=0):
+						return path
+		return [0]
+		path.pop()
+		visited[vertices.index(u)]= False
+
+
+	def link_weight_H(self,nodei,nodef):
+		#hierarchial link weights
+		print(nodei.attrib['filename'],nodef)
+		doci=nodei.get('filename')
+		docf=nodef.get('filename')
+
+		#indexi=self.retrieved.index(nodei)
+		sum_x=0.01
+		n_link_weight=0
+
+		In=self.docs_objects[self.doc_list.index(docf)].inlinks #no of inlinks to docf
+
+		for Ip in self.get_node(nodei).outlinks: #Ip is doc index
+			sum_x=sum_x+len(self.docs_objects[Ip].inlinks)
+		n_link_weight=len(In)/sum_x
+		return n_link_weight
+
+	def link_weight_N(self,nodei,nodef): 
+
+		print(nodei.attrib['filename'],nodef)
+		doci=nodei.get('filename')
+		docf=nodef.get('filename')
+
+		#indexi=self.retrieved.index(nodei)
+		sum_x=0.01
+		n_link_weight=0
+
+		In=self.docs_objects[self.doc_list.index(docf)].inlinks #no of inlinks to docf
+
+		for Ip in self.get_node(nodei).outlinks: #Ip is doc index
+			sum_x=sum_x+len(self.docs_objects[Ip].inlinks)
+		n_link_weight=len(In)/sum_x
+		return n_link_weight
+
+	def printAllPaths(self,u,d,global_root):
+		vertices=global_root.findall(".//")
+		#print(vertices)
+		visited =[False]*(len(vertices))
+		path = [] 
+		path=self.printAllPathsUtil(u, d,visited, path,vertices)
+		return path
+
+
+	def path_weight_nvgn(self,nodei,nodef,global_root):
+		#traverse down path from i to f
+
+		path=self.printAllPaths(nodei,nodef,global_root)
+		path_weight=0.01
+		N=len(path)
+		i=1
+		prev=nodei
+		while(i<N):
+			if(prev.get('filename')!=path[i].get('filename')):
+				#they are in diff doc
+				#print('path:	',path[i])
+				path_weight=path_weight+self.link_weight_N(prev,path[i])
+				prev=path[i]
+				i=i+1
+			else:
+				#they are in same doc
+				#if it is retrieved element
+				if path[i] in self.retrieved:
+					path_weight=path_weight+((self.link_weight_H(prev,path[i])*self.Distance_matrix[self.get_node(prev)][self.get_node(path[i])]))
+					prev=path[i]
+					i=i+1
+				else:
+					i=i+1
+		return path_weight
+
+	def find_global_root(self,index1,index2):
+
+		doc1=self.retrieved[index1].doc
+		doc2=self.retrieved[index2].doc 
+
+		f1=self.docs_root[doc1].get('global_root')
+		f2=self.docs_root[doc1].get('global_root')
+
+		root1=self.docs_root[self.doc_list.index(f1)]
+		root2=self.docs_root[self.doc_list.index(f2)]
+
+		if root1 in root2.findall(".//"):
+			return root2
+		else:
+			return root1
+
+	def link_score_computation(self,damp_factor=0.85): 
+		#link score for computation for all retrived nodes
+		N=len(self.retrieved)
+		#link_score=[]
+
+		for no in range(N): 
+
+			a=[]
+			node=self.retrieved[no]
+			a=node.inlinks_nodes #a conatins list of nodes from which node has inlink
+			link_sum=0
+
+			for i in a: #for each node in inlinks
+
+				i_node=self.retrieved[i]
+				sum_outL=0.01
+				out=i_node.inlinks
+
+				for i_on in out: #for each node in outlinks of i_node in a
+					i_onode=self.retrieved[i_on].element
+					sum_outL=sum_outL+(1/0.01+self.path_weight_nvgn(i_node.element,i_onode,self.find_global_root(i,i_on)))
+
+				link_sum=link_sum+(self.retrieved[no].content_score/(sum_outL*self.path_weight_nvgn(i_node.element,node.element,self.find_global_root(i,no))))
+
+			link_sum=link_sum*(damp_factor) +((1-damp_factor)/N)
+			#link_score.append(link_sum)
+			self.retrieved[no].link_score=link_sum
+			print(link_sum)
+
 
 class Document:
 	def __init__(self):
@@ -435,14 +461,14 @@ class Node:
 #MAIN
 Docs_List=Docs_names()
 New=Di_Graph(Docs_List)	
-Query="Belgian 2008"
+Query="Belgian 2008 hello hi"
 
 New.Add_Edge(Query)
 New.Content_Score()
 New.Distance()
 
 New.link_score_computation()
-print(New.link_score)
+#print(New.link_score)
 #print(New.docs_root[0][2][1])
 #print(New.depth_iter(New.docs_root[0],'rank'))
 
