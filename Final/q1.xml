@@ -1,0 +1,24 @@
+<data xmlns:ns0="http://www.w3.org/1999/xlink" retrieved="0">
+<collectionlink>Link for Xml2
+</collectionlink>
+    <country name="Liechtenstein" retrieved="0">
+        <rank retrieved="0">1</rank>
+        <year nav="q2.xml" retrieved="0" ns0:href="q2.xml" ns0:type="simple">2008</year>
+        <gdppc retrieved="1">141100 Belgian  Belgian Belgian Belgian </gdppc>
+        <neighbor direction="E" name="Austria" retrieved="0" />
+        <neighbor direction="W" name="Switzerland" retrieved="0" />
+    </country>
+    <country name="Singapore" retrieved="1">
+        <rank retrieved="1">4</rank>
+        <year retrieved="1">2008</year>
+        <gdppc retrieved="1">59900</gdppc>
+        <neighbor direction="N" name="Malaysia" retrieved="0" />
+    </country>
+    <country name="Panama" retrieved="0">
+        <rank retrieved="0">68</rank>
+        <year retrieved="1">2011</year>
+        <gdppc retrieved="0">13600</gdppc>
+        <neighbor direction="W" name="Costa Rica" retrieved="0" />
+        <neighbor direction="E" name="Colombia" retrieved="0" />
+    </country>
+</data>

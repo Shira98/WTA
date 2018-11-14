@@ -1,0 +1,18 @@
+<breakfast_menu retrieved="0">
+	<food retrieved="1">
+		<name retrieved="1">Belgian Waffles</name>
+		<price retrieved="1">$5.95</price>
+		<description retrieved="2">
+		Two of our famous Belgian Waffles with plenty of real maple syrup
+		</description>
+		<calories retrieved="1">650</calories>
+	</food>
+	<food retrieved="0">
+		<name retrieved="1">Strawberry Belgian Waffles</name>
+		<price retrieved="0">$7.95</price>
+		<description retrieved="1">
+		Light Belgian waffles covered with strawberries and whipped cream
+		</description>
+		<calories retrieved="1">900</calories>
+	</food>
+</breakfast_menu>

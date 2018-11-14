@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="style.css"?>
+
+<booklet >
+	<concerts>
+		<hello><![CDATA[visit]]></hello>
+		<hypr >
+
+		 <![CDATA[
+		 <a href="https://github.com/Shira98/WTA/invitations">https://github.com/Shira98/WTA/invitations</a>]]></hypr>
+
+		<titles>List of Concerts</titles>
+		<concert>
+			<band>Name:		Water Parks</band>
+			<place>Place:		
+				<venue>Common Hall,</venue>
+				<address>Houston,TX,</address>
+				<contact>+142 893546</contact>
+			</place>
+
+			<schedules>Date and time of concert:	
+				<schedule>	
+					<date>2018-11-03</date>
+					<time>18:00</time>
+				</schedule>
+			</schedules>
+
+			<genre>Genre:		Pop</genre>
+
+			<performers>Performers:		
+				<performer>
+					<firstname>Benji</firstname>
+					<lastname>Madden</lastname>
+					<role>(Guitarist),</role>
+				</performer>
+
+				<performer>
+					<firstname>Courtney</firstname>
+					<lastname>Ballard</lastname>
+					<role>(Bassist)</role>
+				</performer>
+			</performers>
+
+			<tickets>Ticket Price:		
+				<ticket>
+					<type>Gold</type>
+					<price>(Rs.120),</price>
+				</ticket>
+
+				<ticket>
+					<type>Ordinary</type>
+					<price>(Rs.80)</price>
+				</ticket>
+
+			</tickets>
+
+			<discount>Discount:	10%</discount>
+
+			<seller_info>Seller's Information:	
+				<name>Roger Bacon,</name>
+				<email>roger_bacon@gmail.com,</email>
+				<phone>+125 416618,</phone>
+				<address>Common Hall, Houston,TX</address>
+			</seller_info>
+		</concert>
+
+
+		<concert>
+			<band>Name:		Ice Nine Kills</band>
+
+			<place>Place:		
+				<venue>Crown Empire,</venue>
+				<address>Boston, MA,</address>
+				<contact>+126 52512</contact>
+			</place>
+
+			<schedules>Date and time of concert:	
+				<schedule>
+					<date>2018-11-11</date>
+					<time>17:00</time>
+				</schedule>
+			</schedules>
+
+			<genre>Genre:	Rock</genre>
+			<performers>Performers:	
+				<performer>
+					<firstname>John</firstname>
+					<lastname>Beddington</lastname>
+					<role>(Guitarist),</role>
+				</performer>
+
+				<performer>
+					<firstname>Francis</firstname>
+					<lastname>Bacon</lastname>
+					<role>(Bassist)</role>
+				</performer>
+			</performers>
+
+			<tickets>Ticket Price:	
+				<ticket>
+					<type>Gold</type>
+					<price>(Rs.140),</price>
+				</ticket>
+				<ticket>
+					<type>Silver</type>
+					<price>(Rs.120),</price>
+				</ticket>
+				<ticket>
+					<type>Ordinary</type>
+					<price>(Rs.90)</price>
+				</ticket>
+			</tickets>
+
+			<seller_info>Seller's Information:	
+				<name>David Axon,</name>
+				<email>david_Axon@gmail.com,</email>
+				<phone>+142 562681,</phone>
+				<address>Crown Empire, Boston, MA</address>
+			</seller_info>
+		</concert>
+
+
+	</concerts>
+</booklet>
