@@ -11,33 +11,33 @@ def printAllPathsUtil(self, u, d, visited, path,vertices):
 						return path
 		path.pop()
 		visited[vertices.index(u)]= False
-def printAllPaths(self,s,d,global_root):
+def printAllPaths(self,u,d,global_root):
 	vertices=global_root.findall(".//")
 	print(vertices)
 	visited =[False]*(len(vertices))
 	path = [] 
-	path=self.printAllPathsUtil(s, d,visited, path,vertices)
+	path=self.printAllPathsUtil(u, d,visited, path,vertices)
 	return path
-def path_weight_nvgn(nodei,nodef,path_weight):
+def path_weight_nvgn(nodei,nodef,path_weight,global_root):
 	#traverse down path from i to f
-	path=printAllPaths(nodei,nodef)
+	path=printAllPaths(nodei,nodef,global_root)
 	path_weight=0
 	N=len(path)
-	i=0
+	i=1
 	prev=nodei
 	while(i<N):
-		if(self.nodei.doc!=self.path[i].doc):
-			#they are in same doc
-			path_weight=path_weight+link_weight_N(prev,path[i])
-			i=i+1
-			prev=path[i]
-		else:
+		if(self.prev.doc!=self.path[i].doc):
 			#they are in diff doc
+			path_weight=path_weight+link_weight_N(prev,path[i])
+			prev=path[i]
+			i=i+1
+		else:
+			#they are in same doc
 			#if it is retrieved element
 			if path[i] in self.retrieved:
 				path_weight=path_weight+link_weight_H(prev,path[i])
-				i=i+1
 				prev=path[i]
+				i=i+1
 			else:
 				i=i+1
 	return path_weight
