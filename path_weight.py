@@ -61,3 +61,29 @@ def link_score_computation(current_RS,damp_factor=0.85):
 		link_score.append(link_sum)
 
 	return link_score
+def link_weight_H(nodei,nodef):
+	#hierarchial link weights
+	doci=nodei.doc
+	docf=nodef.doc
+	indexi=self.retrieved.index(nodei)
+	indexf=self.retrieved.index(nodef)
+	sum_x=0.01
+	if(doci==docf): #they are in same doc
+		#link weight is hierarchial link weight
+		In=len(nodef.inlinks)
+		for Ip in nodei.outlinks: #Ip is each document index
+			sum_x=sum_x+len(self.docs_objects[Ip].inlinks)
+		link_weight=In/sum_x
+	return link_weight
+
+def link_weight_N(nodei,nodef): 
+	doci=nodei.doc
+	docf=nodef.doc
+	indexi=self.retrieved.index(nodei)
+	sum_x=0
+	n_link_weight=0
+	In=docf.inlinks #no of inlinks to docf
+	for Ip in nodei.outlinks: #Ip is doc index
+		sum_x=sum_x+len(self.docs_objects[Ip].inlinks)
+	n_link_weight=In/sum_x
+	return n_link_weight
