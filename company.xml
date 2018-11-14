@@ -1,0 +1,43 @@
+
+<?xml version="1.0" encoding="utf-8" ?> 
+<company> 
+    <division>My Cleaning Solution™</division> 
+    <slogan>The Solution To All Of Your Cleaning Problems™</slogan> 
+    <description>My Cleaning Solution™ is a subsidiary of My Custom Service Solutions Inc.™ and provides comprehensive Cleaning Services to homes and businesses.</description> 
+    <copyright>My Cleaning Solution™ is a subsidiary of My Custom Service Solutions Inc.™ and reserves all right to the name, slogan, and domains with that name.</copyright> 
+    <services <bookstore xmlns:xlink="http://www.w3.org/1999/xlink">> 
+        <service> 
+            <name>My Awning Cleaning Solution™</name> 
+            <websites> 
+                <website xmlns:href="http:\\www.myawningcleaningsolution.com">MyAwningCleaningSolution.com™</website> 
+                <website xmlns:href="http:\\www.myawningcleaningsolution.net">MyAwningCleaningSolution.net™</website> 
+            </websites> 
+            <contact> 
+            </contact> 
+        </service> 
+        <service> 
+            <name>My Blind Cleaning Solution™</name> 
+            <websites> 
+                <website xmlns:href="http:\\www.myblindcleaningsolution.com">MyBlindCleaningSolution.com™</website> 
+                <website xmlns:href="http:\\www.myblindcleaningsolution.net">MyBlindCleaningSolution.net™</website> 
+            </websites> 
+        </service> 
+        <service> 
+            <name>My Carpet Cleaning Solution™</name> 
+            <websites> 
+                <website xmlns:href="http:\\www.mycarpetcleaningsolution.com">MyCarpetCleaningSolution.com™</website> 
+                <website xmlns:href="http:\\www.mycarpetcleaningsolution.net">MyCarpetCleaningSolution.net™</website> 
+            </websites> 
+        </service> 
+    </services> 
+    <contact> 
+        <email>robert.hall@mycleaningsolution.com</email> 
+        <email>info@mycleaningsolution.com</email> 
+        <email>schedule@mycleaningsolution.com</email> 
+        <email>contact@mycleaningsolution.com</email> 
+        <email>freeestimate@mycleaningsolution.com</email> 
+        <email>mycleaningsolution@hotmail.com</email> 
+        <email>mycleaningsolution@live.com</email> 
+        <phone>(714) 612-6186</phone> 
+    </contact> 
+</company> 

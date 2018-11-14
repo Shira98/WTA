@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mydogs xmlns:xlink="http://www.w3.org/1999/xlink">
+
+<mydog>
+  <description>
+  Anton is my favorite dog. He has won a lot of.....
+  </description>
+  <fact xlink:type="simple" xlink:href="https://dog.com/dogbreeds.xml#Rottweiler">
+  Fact about Rottweiler 
+  </fact>
+</mydog>
+
+<mydog>
+  <description>
+  Pluto is the sweetest dog on earth......
+  </description>
+  <fact xlink:type="simple" xlink:href="https://dog.com/dogbreeds.xml#FCRetriever">
+  Fact about flat-coated Retriever 
+  </fact>
+</mydog>
+
+</mydogs>
