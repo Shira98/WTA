@@ -3,11 +3,14 @@ import skfuzzy as fuzz
 import skfuzzy.control as ctrl
 
 
-def Normalize(x): #min=0.0 max=100.0
-  return float((x-0.0)/(100.0-0.0))
+def Normalize(x,maximum): #min=0.0 max=100.0
+  return float((x-0.0)/(maximum-0.0))
 
-def fuzzy(content,link): #Maps crisp to fuzzy sets.
+def fuzzy(c,l): #Maps crisp to fuzzy sets.
   #3 I/P fuzzy sets: Low, Med, High.
+  
+  link=Normalize(l,50.0)
+  content=Normalize(c,10.0)
   
   #6 O/P fuzzy sets: Very_low, Low, Med, Good, Very_Good, Excellent.
  
@@ -75,12 +78,4 @@ def fuzzy(content,link): #Maps crisp to fuzzy sets.
   #return the relevant score of the element:
   return relevance.output['relevant_score']
 
-#c and l scores range [0,100]
-c=0.9
-l=0.9
-s=fuzzy(c,l)
-#cont=Normalize(c)
-#link=Normalize(l)
-#s=fuzzy(cont,link)
-print(s)
 
