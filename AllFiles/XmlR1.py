@@ -51,6 +51,15 @@ def string_match(list,file_name,root):
 
 	return root
 
+def add_filename_attribute(file_name,root):
+	elements=root.findall(".//")
+	for element in elements:
+		#add attribute called filename to each attribute
+		element.set('filename', file_name)
+		#tree.write(file_name)
+	root.set('filename', file_name)
+
+
 def word_find(word,root,file_name):
 	#if word in root.text
 		text=root.text
