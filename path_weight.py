@@ -41,3 +41,23 @@ def path_weight_nvgn(nodei,nodef,path_weight,global_root):
 			else:
 				i=i+1
 	return path_weight
+def link_score_computation(current_RS,damp_factor=0.85): 
+	#link score for computation for all retrived nodes
+	N=len(self.retrieved)
+	link_score=[]
+	for no in range(N): 
+		a=[]
+		node=self.retrived[no]
+		a=node.inlinks_nodes #a conatins list of documents from which node has inlink
+		link_sum=0
+		for i_node in a: #for each node in inlinks
+			out=[]
+			sum_outL=0
+			out=i_node.inlinks
+			for i_onode in out: #for each node in outlinks of i_node in a
+				sum_outL=sum_outL+(1/path_weight_nvgn(i_node,i_onode))
+			link_sum=link_sum+(current_RS[no]/(sum_outL*path_weight_nvgn(i_node,node)))
+		link_sum=link_sum*(damp_factor) +((1-damp_factor)/N)
+		link_score.append(link_sum)
+
+	return link_score
